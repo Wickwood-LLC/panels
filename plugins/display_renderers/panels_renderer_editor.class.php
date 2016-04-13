@@ -464,7 +464,7 @@ class panels_renderer_editor extends panels_renderer_standard {
 
     // Allow others to add/remove links from pane context menu.
     // Grouped by 'top', 'style', 'visibility', 'lock', 'cache' and 'bottom'
-    drupal_alter('get_pane_links', $links, $pane, $content_type);
+    drupal_alter('get_pane_links', $links, $pane, $content_type, $this);
 
     $dropdown_links = $links['top'];
     $category_labels = array(
