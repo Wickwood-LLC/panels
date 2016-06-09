@@ -603,7 +603,16 @@ class panels_renderer_standard {
         $cache = new panels_cache_object();
       }
 
-      $content = ctools_content_render($pane->type, $pane->subtype, $pane->configuration, array(), $this->display->args, $this->display->context);
+      if (isset($pane->breakpoint_active) && $pane->breakpoint_active) {
+        // No need to render actual content when breakpoint is active on panel.
+        // Just use a dummy content.
+        $content = new stdClass();
+        $content->type = $pane->type;
+        $content->subtype = $pane->subtype;
+      }
+      else {
+        $content = ctools_content_render($pane->type, $pane->subtype, $pane->configuration, array(), $this->display->args, $this->display->context);
+      }
 
       foreach (module_implements('panels_pane_content_alter') as $module) {
         $function = $module . '_panels_pane_content_alter';
