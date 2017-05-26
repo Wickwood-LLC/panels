@@ -565,21 +565,25 @@ class panels_renderer_standard {
     }
 
     if (!empty($content->content)) {
+      $output = NULL;
       if (!empty($pane->style['style'])) {
         $style = panels_get_style($pane->style['style']);
 
         if (isset($style) && isset($style['render pane'])) {
           $output = theme($style['render pane'], array('content' => $content, 'pane' => $pane, 'display' => $this->display, 'style' => $style, 'settings' => $pane->style['settings']));
-
-          // This could be null if no theme function existed.
-          if (isset($output)) {
-            return $output;
-          }
         }
       }
 
-      // Fallback.
-      return theme('panels_pane', array('content' => $content, 'pane' => $pane, 'display' => $this->display));
+      if (!isset($output)) {
+        // fallback
+        $output = theme('panels_pane', array('content' => $content, 'pane' => $pane, 'display' => $this->display));
+      }
+
+      foreach (module_implements('panels_pane_output_alter') as $module) {
+        $function = $module . '_panels_pane_output_alter';
+        $function($output, $pane, $this->display->args, $this->display->context, $this, $this->display);
+      }
+      return $output;
     }
   }
 
