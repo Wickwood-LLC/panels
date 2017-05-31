@@ -607,8 +607,8 @@ class panels_renderer_standard {
         $cache = new panels_cache_object();
       }
 
-      if (isset($pane->breakpoint_active) && $pane->breakpoint_active) {
-        // No need to render actual content when breakpoint is active on panel.
+      if (isset($pane->breakpoint_active) && $pane->breakpoint_active && (!isset($pane->configuration['breakpoint_pane_render_always']) || !$pane->configuration['breakpoint_pane_render_always'])) {
+        // No need to render actual content when breakpoint is active on panel and configured not to render.
         // Just use a dummy content.
         $content = new stdClass();
         $content->type = $pane->type;
