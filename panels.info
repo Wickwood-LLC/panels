@@ -2,7 +2,7 @@ name = Panels
 description = Core Panels display functions; provides no external UI, at least one other Panels module should be enabled. WWM version of module to help patch on breakpoint_panels to work.
 core = 7.x
 package = "Panels"
-version = 3.8
+
 configure = admin/structure/panels
 dependencies[] = ctools
 files[] = panels.module
@@ -18,3 +18,6 @@ files[] = tests/PanelsEntityViewWebTestCase.test
 files[] = tests/PanelsNodeViewWebTestCase.test
 files[] = tests/PanelsTermViewWebTestCase.test
 files[] = tests/PanelsUserViewWebTestCase.test
+
+version = "7.x-3.8"
+project = "panels"
