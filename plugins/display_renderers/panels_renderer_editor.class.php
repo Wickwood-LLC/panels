@@ -1404,6 +1404,8 @@ class panels_renderer_editor extends panels_renderer_standard {
     );
 
     $output = ctools_modal_form_wrapper('panels_edit_configure_access_test_form', $form_state);
+    $pane->access['plugins'][$id] = $form_state['test'];
+
     if (empty($form_state['executed'])) {
       $this->commands = $output;
       return;
