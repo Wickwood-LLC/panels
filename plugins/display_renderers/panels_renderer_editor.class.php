@@ -2065,6 +2065,9 @@ function panels_edit_configure_access_test_form_submit(&$form, &$form_state) {
     $function($form, $form_state);
   }
 
+  if (!isset($form_state['values']['settings'])) {
+    $form_state['values']['settings'] = array();
+  }
   $form_state['test']['settings'] = $form_state['values']['settings'];
   if (isset($form_state['values']['context'])) {
     $form_state['test']['context'] = $form_state['values']['context'];
