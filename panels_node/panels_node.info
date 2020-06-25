@@ -1,5 +1,5 @@
-name = Panel nodes
-description = Create nodes that are divided into areas with selectable content.
+name = Panel nodes (deprecated)
+description = Create nodes that are divided into areas with selectable content. This module is deprecated, use <a href="http://drupal.org/project/panelizer">Panelizer</a> instead.
 package = "Panels"
 dependencies[] = panels
 configure = admin/structure/panels
