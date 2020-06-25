@@ -615,7 +615,7 @@ class panels_renderer_editor extends panels_renderer_standard {
     }
     elseif (isset($content_type['category'])) {
       if (is_array($content_type['category'])) {
-        list($category, $weight) = $content_type['category'];
+        $category = reset($content_type['category']);
       }
       else {
         $category = $content_type['category'];
