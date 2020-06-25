@@ -1149,7 +1149,7 @@ class panels_renderer_editor extends panels_renderer_standard {
 
     // Backward compatibility: Translate old-style stylizer to new style
     // stylizer.
-    if ($style['name'] == 'stylizer' && !empty($conf['style']) && $conf['style'] != '$') {
+    if (isset($style['name']) && $style['name'] == 'stylizer' && !empty($conf['style']) && $conf['style'] != '$') {
       $style = panels_get_style('stylizer:' . $conf['style']);
     }
 
