@@ -552,8 +552,8 @@ function panels_ctools_style_base_types() {
 function panels_stylizer_lipsum() {
   return <<<LIPSUM
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at 
-      velit dolor. Donec egestas tellus sit amet urna rhoncus adipiscing. Proin 
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at
+      velit dolor. Donec egestas tellus sit amet urna rhoncus adipiscing. Proin
       nec porttitor sem. Maecenas aliquam, purus nec tempus dignissim, nulla arcu
       aliquam diam, non tincidunt massa ante vel dolor. Aliquam sapien sapien,
       tincidunt id tristique at, pretium sagittis libero.
@@ -803,6 +803,15 @@ class panels_display {
   public function duplicate_pane($pid, $location = FALSE) {
     $pane = $this->clone_pane($pid);
     $this->add_pane($pane, $location);
+  }
+
+  /**
+   * Clone a pane.
+   */
+  public function clone_pane($pid) {
+    $pane = clone $this->content[$pid];
+    $pane->uuid = ctools_uuid_generate();
+    return $pane;
   }
 
   /**
