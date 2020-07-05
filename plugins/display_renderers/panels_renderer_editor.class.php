@@ -1052,9 +1052,8 @@ class panels_renderer_editor extends panels_renderer_standard {
         case 'pane':
           $pane->style['style'] = $form_state['style'];
           if (isset($pane->style['settings'])) {
-            unset($pane->style['settings']);
+            $pane->style['settings'] = NULL;
           }
-
           break;
       }
       panels_edit_cache_set($this->cache);
