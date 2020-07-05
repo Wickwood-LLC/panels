@@ -58,6 +58,7 @@ function panels_theme() {
       'image' => NULL,
       'link' => NULL,
       'class' => NULL,
+      'options' => NULL,
     ),
   );
   $theme['panels_layout_icon'] = array(
@@ -1377,11 +1378,14 @@ function theme_panels_layout_icon($vars) {
  * @todo Why does this take 4 arguments but only makes use of two?
  */
 function theme_panels_layout_link($vars) {
-  $output = '<div class="' . implode(' ', $vars['class']) . '">';
-  $output .= $vars['image'];
-  $output .= '<div>' . $vars['title'] . '</div>';
-  $output .= '</div>';
-  return $output;
+  $options = !empty($vars['options']) ? $vars['options'] : array();
+  if (!isset($options['attributes']['class'])) {
+    $options['attributes']['class'] = array();
+  }
+  $options['attributes']['class'] = array_merge($options['attributes']['class'], $vars['class']);
+
+  $content = $vars['image'] . '<span>' . $vars['title'] . '</span>';
+  return l($content, $vars['link'], $options + array('html' => TRUE));
 }
 
 /**
@@ -1403,18 +1407,15 @@ function panels_print_layout_link($id, $layout, $link, $options = array(), $curr
 
   ctools_add_css('panels_admin', 'panels');
   $file = $layout['path'] . '/' . $layout['icon'];
-  $image = l(
-    theme('image', array('path' => $file)),
-    $link,
-    array('html' => TRUE) + $options
-  );
-  $title = l($layout['title'], $link, $options);
+  $image = theme('image', array('path' => $file));
   return theme(
     'panels_layout_link',
     array(
-      'title' => $title,
+      'title' => $layout['title'],
       'image' => $image,
+      'link' => $link,
       'class' => $class,
+      'options' => $options,
     )
   );
 }
